@@ -1,0 +1,28 @@
+{
+  "name": "dynamic-image-slides",
+  "version": "1.0.0",
+  "description": "simple image slide show that updates using socket.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "cross-env NODE_ENV=production PORT=3000 TIMER_MS=30000 node server/index.js",
+    "dev": "cross-env NODE_ENV=development PORT=8090 TIMER_MS=30000 nodemon server/index.js --watch server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cross-env": "^5.2.0",
+    "express": "^4.17.1",
+    "lodash": "^4.17.11",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
+    "nodemon": "^1.19.1"
+  }
+}

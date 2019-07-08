@@ -1,0 +1,10 @@
+{
+  "eslint.validate": ["javascript"],
+  "eslint.options": {
+    "extensions": [".js"]
+  },
+  "cSpell.words": [
+    "debounced",
+    "iife"
+  ]
+}

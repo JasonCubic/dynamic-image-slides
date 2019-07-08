@@ -1,0 +1,32 @@
+body {
+  background-color: #101010;
+  margin: 0;
+  cursor: none;
+}
+
+.slide-box {
+  position:relative;
+  align-items: center; /* for vertical align */
+  justify-content: center; /* for horizontal align */
+  display: flex;
+  height: 100vh;
+}
+
+.slide-box img {
+  position:absolute;
+  max-width: 96%;
+  max-height: 96vh;
+  -webkit-transition: opacity 1.2s ease-in-out;
+  -moz-transition: opacity 1.2s ease-in-out;
+  -o-transition: opacity 1.2s ease-in-out;
+  transition: opacity 1.2s ease-in-out;
+  opacity:0;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+
+.slide-box img.visible {
+  opacity:1;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+  filter: alpha(opacity=1);
+}

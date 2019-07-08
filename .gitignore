@@ -1,0 +1,8 @@
+node_modules/
+
+static/slides/*.jpg
+static/slides/*.png
+static/slides/*.gif
+static/slides/*.ico
+static/slides/*.bmp
+static/slides/*.webp
