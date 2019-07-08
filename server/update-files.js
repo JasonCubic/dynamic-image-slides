@@ -57,6 +57,9 @@ function isValidImage(rawFilename) {
   if (_.endsWith(filename, '.webp')) {
     return true;
   }
+  if (_.endsWith(filename, '.svg')) {
+    return true;
+  }
   return false;
 }
 
