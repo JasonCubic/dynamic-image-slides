@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "cross-env NODE_ENV=production PORT=3000 TIMER_MS=30000 node server/index.js",
-    "dev": "cross-env NODE_ENV=development PORT=8090 TIMER_MS=30000 nodemon server/index.js --watch server"
+    "start": "cross-env NODE_ENV=production PORT=8090 TIMER_SEC=30 PASS=guilty_spark node server/index.js",
+    "dev": "cross-env NODE_ENV=development PORT=8090 TIMER_SEC=30 PASS=guilty_spark nodemon server/index.js --watch server"
   },
   "keywords": [],
   "author": "",

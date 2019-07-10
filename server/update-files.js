@@ -23,7 +23,7 @@ function updateStore(files, changedFilename) {
     }
     return oldFiles[filesOldIndex];
   });
-  store.set('oldFiles', oldFiles);
+  // store.set('oldFiles', oldFiles);
   store.set('files', newFiles);
   const currentlyShownImageName = store.get('currentlyShownImageName');
   const currentlyShownImageIndex = newFiles.findIndex(row => row.filename === currentlyShownImageName);

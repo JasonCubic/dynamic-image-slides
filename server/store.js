@@ -6,10 +6,11 @@ const store = {
   slideUrlPrefix: 'slides/',
   port: 3000,
   files: [],
-  oldFiles: [],
-  diffFiles: [],
+  // oldFiles: [],
+  // diffFiles: [],
   currentlyShownImageName: 0,
-  timerMs: 30 * 1000,
+  timerSec: 30,
+  pass: '',
 };
 
 module.exports.get = path => _.get(store, path, '');

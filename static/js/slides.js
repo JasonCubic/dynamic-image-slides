@@ -35,6 +35,16 @@
   }
 
 
+  function handleKeyDown(event, socket) {
+    if (event.code === 'ArrowRight' || event.key === '+') {
+      socket.emit('slide-next', { href: window.location.href });
+    }
+    if (event.code === 'ArrowLeft' || event.key === '-') {
+      socket.emit('slide-back', { href: window.location.href });
+    }
+  }
+
+
   ready(function () {
     const socket = io();
     socket.on('disconnect', function () {
@@ -46,5 +56,6 @@
       console.log('socket.io connected socket.id: ', socket.id);
       socket.emit('request-current-image');
     });
+    document.addEventListener('keydown', function (event) { handleKeyDown(event, socket); });
   });
 })();
