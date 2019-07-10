@@ -16,6 +16,7 @@ function advance() {
   const files = _.cloneDeep(store.get('files'));
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
     // TODO: handle when all slides are deleted
   }
   if (files.length === 1) {
@@ -58,6 +59,7 @@ function next() {
   const files = store.get('files');
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
   }
   if (files.length === 1) {
     const currentlyShownImageName = store.get('currentlyShownImageName');
@@ -83,6 +85,7 @@ function back() {
   const files = store.get('files');
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
   }
   if (files.length === 1) {
     const currentlyShownImageName = store.get('currentlyShownImageName');

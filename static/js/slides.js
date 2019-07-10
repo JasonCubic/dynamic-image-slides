@@ -29,6 +29,9 @@
     });
     newImgEl.setAttribute('src', data.url);
     if (oldImgEl) {
+      if (newImgEl.src === oldImgEl.src) {
+        return;
+      }
       oldImgEl.classList.remove('visible');
     }
     newImgEl.classList.add('visible');
