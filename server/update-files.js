@@ -71,7 +71,18 @@ function updateFiles(eventType = '', filename = '') {
       return;
     }
     const imageFiles = files.filter(file => isValidImage(file));
-    updateStore(imageFiles, filename);
+    const hotFiles = imageFiles.filter(file => _.startsWith(file, '!'));
+    if (hotFiles.length > 0) {
+      updateStore(hotFiles, filename);
+      return;
+    }
+    const normalFiles = imageFiles.filter(file => !_.startsWith(file, '!') && !_.startsWith(file, '_'));
+    if (normalFiles.length > 0) {
+      updateStore(normalFiles, filename);
+      return;
+    }
+    const defaultFiles = imageFiles.filter(file => _.startsWith(file, '_'));
+    updateStore(defaultFiles, filename);
   });
 }
 
