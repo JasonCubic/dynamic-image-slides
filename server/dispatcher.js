@@ -9,12 +9,14 @@ function initTimer() {
   timer = setTimeout(advance, timerSec * 1000);
 }
 
+
 function advance() {
   clearTimeout(timer);
   const io = store.get('io');
   const files = _.cloneDeep(store.get('files'));
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
     // TODO: handle when all slides are deleted
   }
   if (files.length === 1) {
@@ -25,20 +27,13 @@ function advance() {
       return;
     }
   }
-
   const currentlyShownImageName = store.get('currentlyShownImageName');
   const currentlyShownImageIndex = files.findIndex(row => row.filename === currentlyShownImageName);
-
   if (currentlyShownImageIndex !== -1) {
     files[currentlyShownImageIndex].lastShown = new Date().getTime();
   }
-
-  // store.set('files', sortedFiles);
-
-
   const sortedFiles = _.cloneDeep(_.orderBy(files, ['lastShown', 'date', 'url'], ['asc', 'asc', 'asc']));
   io.emit('new-slide-images', sortedFiles[0]); // emit custom event to all connected sockets (broadcast)
-  // sortedFiles[0].lastShown = new Date().getTime();
   store.set('currentlyShownImageName', sortedFiles[0].filename);
   store.set('files', sortedFiles);
   initTimer();
@@ -64,6 +59,7 @@ function next() {
   const files = store.get('files');
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
   }
   if (files.length === 1) {
     const currentlyShownImageName = store.get('currentlyShownImageName');
@@ -89,6 +85,7 @@ function back() {
   const files = store.get('files');
   if (files.length === 0) {
     io.emit('new-slide-images', {}); // emit custom event to all connected sockets (broadcast)
+    return;
   }
   if (files.length === 1) {
     const currentlyShownImageName = store.get('currentlyShownImageName');
