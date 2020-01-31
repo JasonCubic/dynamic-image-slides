@@ -17,12 +17,13 @@ function updateStore(files, changedFilename) {
       return {
         filename: file,
         date: now,
-        lastShown: file === changedFilename ? -1 : 0,
+        lastShown: path.basename(file) === path.basename(changedFilename) ? -1 : 0,
         url: `${slideUrlPrefix}${encodeURIComponent(_.toLower(file))}`,
       };
     }
     return oldFiles[filesOldIndex];
   });
+  console.log('newFiles: ', newFiles);
   // store.set('oldFiles', oldFiles);
   store.set('files', newFiles);
   const currentlyShownImageName = store.get('currentlyShownImageName');
@@ -65,6 +66,8 @@ function isValidImage(rawFilename) {
 
 // eslint-disable-next-line no-unused-vars
 function updateFiles(eventType = '', filename = '') {
+  console.log('eventType: ', eventType);
+  console.log('filename: ', filename);
   debouncedReadDir(path.join(__dirname, '..', 'static', 'slides'), {}, (err, files) => {
     if (err) {
       console.log('debouncedReadDir ERROR: ', err);

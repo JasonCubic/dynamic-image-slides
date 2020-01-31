@@ -1,5 +1,13 @@
 node_modules/
 
+static/museum/*.jpg
+static/museum/*.png
+static/museum/*.gif
+static/museum/*.ico
+static/museum/*.bmp
+static/museum/*.webp
+static/museum/*.svg
+
 static/slides/*.jpg
 static/slides/*.png
 static/slides/*.gif

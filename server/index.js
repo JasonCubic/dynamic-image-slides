@@ -1,14 +1,16 @@
-const fs = require('fs');
 const path = require('path');
 const http = require('http');
 const url = require('url');
 const querystring = require('querystring');
 const express = require('express');
 const socketIo = require('socket.io');
+const chokidar = require('chokidar');
 const _ = require('lodash');
 const updateFiles = require('./update-files');
 const store = require('./store');
 const dispatcher = require('./dispatcher');
+
+const debouncedUpdateFiles = _.debounce(updateFiles, 1000);
 
 const app = express();
 const server = http.Server(app);
@@ -22,7 +24,18 @@ store.set('timerSec', _.toInteger(process.env.TIMER_SEC) || 30);
 store.set('pass', process.env.PASS || '');
 
 
-fs.watch(slidePath, {}, updateFiles);
+const watcher = chokidar.watch(slidePath, {
+  awaitWriteFinish: {
+    stabilityThreshold: 2000,
+    pollInterval: 500,
+  },
+});
+
+watcher
+  .on('add', myPath => debouncedUpdateFiles('add', myPath))
+  .on('change', myPath => debouncedUpdateFiles('change', myPath))
+  .on('unlink', myPath => debouncedUpdateFiles('unlink', myPath));
+
 
 app.use('/', express.static(path.join(__dirname, '..', 'static')));
 
